@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segundo Parcial</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="Vehiculo.js"></script>
+    <script src="Camion.js"></script>
+    <script src="Auto.js"></script>
+    <script src="GrupoVehiculos.js"></script>
+    <script src="TablaVehiculos.js"></script>
+    <script src="form_datos.js"></script>
+    <script src="form_abm.js"></script>
+    <script src="auxiliares.js"></script>
+    <script src="spinner.js"></script>
+    <script src="mensaje_error.js"></script>
+</head>
+<body id="body">
+    <!-- Titulo -->
+    <h2>Registro de Vehiculos</h2>
+
+    <!-- Seccion donde se mostrara el formulario form datos principal -->
+    <div class="form_datos" id="form_datos">
+
+        <!-- Tabla donde se mostraran los elementos de la jerarquia de clases -->
+        <table class="tabla_vehiculos" id="tabla_vehiculos">
+            <thead id="tabla_vehiculos_header"></thead>
+            <tbody id="tabla_vehiculos_body"></tbody>
+        </table><br>
+
+        <!-- Boton para agregar un elemento a la jerarquia -->
+        <button class="agregar_vehiculo" id="agregar_vehiculo">Agregar un Vehiculo</button><br><br>
+    </div>
+
+    <!-- Seccion donde se mostrara el formulario form abm -->
+    <div class="form_abm" id="form_abm">
+        <h3 id="titulo_abm">Datos de la vehiculo</h3><br>
+
+        <div class="campo_vehiculo" id="campo_vehiculo">
+            <!-- Campo Id -->
+            <label id="lbl_id" for="txt_id">Id </label>
+            <input type="text" id="txt_id" readonly><br><br>
+
+            <!-- Campo Modelo -->
+            <label id="lbl_modelo" for="txt_modelo">Modelo </label>
+            <input type="text" id="txt_modelo">
+            <label id="lbl_error_modelo"></label><br><br>
+
+            <!-- Campo Año de fabricacion -->
+            <label id="lbl_anoFabricacion" for="txt_anoFabricacion">Año de Fabricacion </label>
+            <input type="text" id="txt_anoFabricacion">
+            <label id="lbl_error_anoFabricacion"></label><br><br>
+
+            <!-- Campo Velocidad Maxima -->
+            <label id="lbl_velMax" for="txt_velMax">Velocidad Maxima </label>
+            <input type="text" id="txt_velMax">
+            <label id="lbl_error_velMax"></label><br><br>
+
+            <!-- Select de el tipo de auto -->
+            <label for="sel_tipo_vehiculo">Tipo</label>
+            <select id="sel_tipo_vehiculo" name="filtro">
+                <option value="1">Camion</option>
+                <option value="2">Auto</option>            
+            </select><br><br>
+        </div>
+
+        <div class="campo_camion" id="campo_camion">
+            <!-- Campo Carga -->
+            <label id="lbl_carga" for="txt_carga">Carga </label>
+            <input type="text" id="txt_carga">
+            <label id="lbl_error_carga"></label><br><br>
+
+            <!-- Campo Autonomia -->
+            <label id="lbl_autonomia" for="txt_autonomia">Autonomia </label>
+            <input type="text" id="txt_autonomia">
+            <label id="lbl_error_autonomia"></label><br><br>   
+        </div>
+        
+        <div class="campo_auto" id="campo_auto">
+            <!-- Campo Cantidad de puertas -->
+            <label id="lbl_cantidadPuertas" for="txt_cantidadPuertas">Cantidad de Puertas </label>
+            <input type="text" id="txt_cantidadPuertas">
+            <label id="lbl_error_cantidadPuertas"></label><br><br>
+
+            <!-- Campo Asientos -->
+            <label id="lbl_asientos" for="txt_asientos">Asientos </label>
+            <input type="text" id="txt_asientos">
+            <label id="lbl_error_asientos"></label><br><br>
+        </div>
+
+        <div class="campo_botones" id="campo_botones">
+            <button class="btn_aceptar" id="btn_aceptar">Aceptar</button>
+            <button class="btn_cancelar" id="btn_cancelar">Cancelar</button>
+        </div>
+        
+    </div>
+
+    <div class="contenedor_spinner" id="contenedor_spinner" display="none">
+        <div class="spinner" id="spinner" display="none"></div>
+    </div>
+
+    <div class="mensaje_error" id="mensaje_error">
+        <div>
+            <label id="idLblMensaje"></label><br><br><br>
+            <button class="btn_aceptar" id="btn_msj_error">Aceptar</button>
+        </div>
+        
+    </div>
+    
+
+</body>
+<script>
+    //========================= Primera generacion cuando se habre la pagina ==================================//
+    // Instancio el elemento del form datos
+    form_datos = new Form_datos("form_datos")
+
+    // Instancio el elemento del spinner
+    spinner = new Spinner("contenedor_spinner")
+
+    // Instancio el elemento del mensaje de error
+    mensaje_error = new Mensaje_error("mensaje_error","idLblMensaje","No se pudo acceder al servidor. Intente denuevo mas tarde","btn_msj_error",false)
+    mensaje_error.ocultar()
+
+    // Pongo los elementos del form am en un objeto
+    elementosFormAbm = {
+        "form" : document.getElementById("form_abm"),
+        "titulo_abm" : document.getElementById("titulo_abm"),
+        "txt_id" : document.getElementById("txt_id"),
+        "txt_modelo" : document.getElementById("txt_modelo"),
+        "lbl_error_modelo" : document.getElementById("lbl_error_modelo"),
+        "txt_anoFabricacion" : document.getElementById("txt_anoFabricacion"),
+        "lbl_error_anoFabricacion" : document.getElementById("lbl_error_anoFabricacion"),
+        "txt_velMax" : document.getElementById("txt_velMax"),
+        "lbl_error_velMax" : document.getElementById("lbl_error_velMax"),
+        "select_tipo" : document.getElementById("sel_tipo_vehiculo"),
+        "txt_carga" : document.getElementById("txt_carga"),
+        "lbl_error_carga" : document.getElementById("lbl_error_carga"),
+        "txt_autonomia" : document.getElementById("txt_autonomia"),
+        "lbl_error_autonomia" : document.getElementById("lbl_error_autonomia"),
+        "txt_cantidadPuertas" : document.getElementById("txt_cantidadPuertas"),
+        "lbl_error_cantidadPuertas" : document.getElementById("lbl_error_cantidadPuertas"),
+        "txt_asientos" : document.getElementById("txt_asientos"),
+        "lbl_error_asientos" : document.getElementById("lbl_error_asientos"),
+        "campo_vehiculo" : document.getElementById("campo_vehiculo"),
+        "campo_camion" : document.getElementById("campo_camion"),
+        "campo_auto" : document.getElementById("campo_auto"),
+        "campo_botones" : document.getElementById("campo_botones"),
+        "btn_aceptar" : document.getElementById("btn_aceptar"),
+        "btn_cancelar" : document.getElementById("btn_cancelar")
+    }
+    
+    // Instancio el formulario que cree 
+    form_abm = new Form_abm(elementosFormAbm)
+    form_abm.ocultar()
+
+    // Creo la tabla por primera vez y la dibujo
+    tablaVehiculos = new TablaVehiculos("tabla_vehiculos","tabla_vehiculos_header","tabla_vehiculos_body")
+
+    // Creo el manejador del grupo de Vehiculos
+    grupoVehiculos = new GrupoVehiculos()
+    grupoVehiculos.obtenerListaVehiculos(form_datos,spinner,mensaje_error,tablaVehiculos)
+
+    //================================== Eventos del form datos ===============================================//
+    // Evento cuando se le da click a la tabla
+    tablaVehiculos.tabla.addEventListener("click",(event)=>{
+        target = event.target
+        if(target.nodeName == "BUTTON"){
+            celda = target.parentNode
+            fila = celda.parentNode
+            if(target.innerText == "Modificar"){
+                form_datos.ocultar()
+                form_abm.mostrar("Modificar")
+                form_abm.completarFormulario(grupoVehiculos.listaVehiculosEnUso[fila.id])
+            }
+            else if(target.innerText == "Eliminar"){
+                form_datos.ocultar()
+                form_abm.mostrar("Eliminar")
+                form_abm.completarFormulario(grupoVehiculos.listaVehiculosEnUso[fila.id])
+            }
+        }
+    })
+
+    // Evento para cuando se hace click en boton para agregar una vehiculo
+    btn_agregar_vehiculo = document.getElementById("agregar_vehiculo")
+    btn_agregar_vehiculo.addEventListener("click",(event)=>{
+        form_datos.ocultar()
+        form_abm.select_tipo.disabled = false
+        form_abm.mostrar("DAR DE ALTA")
+    })
+
+    //================================== Eventos del form abm ================================================//
+    // Evento cuando se le da click a cancelar
+    form_abm.btn_cancelar.addEventListener("click",(event)=>{
+        form_abm.limpiarFormulario()
+        form_abm.ocultar()
+        form_abm.select_tipo.disabled = false
+        form_datos.mostrar()
+    })
+
+    // Evento cuando se le da click a guardar
+    form_abm.btn_aceptar.addEventListener("click", async (event)=>{
+        if(form_abm.titulo_abm.innerText == "DAR DE ALTA"){
+            datos = form_abm.validarFormulario()
+            if(datos){
+                form_abm.ocultar()
+                spinner.mostrar()
+                respuesta = await grupoVehiculos.add(datos)
+                spinner.ocultar()
+                form_abm.limpiarFormulario()
+                form_abm.ocultar()
+                switch(respuesta){
+                    case 1:        
+                        form_datos.mostrar()
+                        tablaVehiculos.dibujarTabla(grupoVehiculos.listaVehiculosEnUso)
+                        break
+                    case 0:
+                        mensaje_error = new Mensaje_error("mensaje_error","idLblMensaje","Error interno del servidor","btn_msj_error",true)
+                        mensaje_error.mostrar()
+                        break
+                    case -1:
+                        mensaje_error = new Mensaje_error("mensaje_error","idLblMensaje","Problema con la aplicacion","btn_msj_error",true)
+                        mensaje_error.mostrar()
+                        break
+                }
+            }
+        }
+        else if(form_abm.titulo_abm.innerText == "MODIFICAR"){
+            datos = form_abm.validarFormulario()
+            if(datos){
+                form_abm.ocultar()
+                spinner.mostrar()
+                grupoVehiculos.update(datos, form_datos, tablaVehiculos, spinner, form_abm)
+            }
+        }
+        else if(form_abm.titulo_abm.innerText == "ELIMINAR"){
+            form_abm.ocultar()
+            spinner.mostrar()
+            respuesta = await grupoVehiculos.delete(form_abm.vehiculoEnUso)
+            spinner.ocultar()
+            form_abm.limpiarFormulario()
+            form_abm.ocultar()
+            switch(respuesta){
+                case 1:        
+                    form_datos.mostrar()
+                    tablaVehiculos.dibujarTabla(grupoVehiculos.listaVehiculosEnUso)
+                    break
+                case 0:
+                    mensaje_error = new Mensaje_error("mensaje_error","idLblMensaje","Error interno del servidor","btn_msj_error",true)
+                    mensaje_error.mostrar()
+                    break
+                case -1:
+                    mensaje_error = new Mensaje_error("mensaje_error","idLblMensaje","Problema con la aplicacion","btn_msj_error",true)
+                    mensaje_error.mostrar()
+                    break
+            }
+        }
+    })
+
+    // Evento cuando se cambia el valor del select del tipo
+    form_abm.select_tipo.addEventListener("change",(event)=>{
+        if(form_abm.select_tipo.value == 1){
+            this.campo_camion.style.display = "block"
+            this.campo_auto.style.display = "none"
+        }
+        else if(form_abm.select_tipo.value == 2){
+            this.campo_camion.style.display = "none"
+            this.campo_auto.style.display = "block"
+        }
+    })
+
+</script>
+</html>

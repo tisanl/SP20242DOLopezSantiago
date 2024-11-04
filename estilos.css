@@ -1,0 +1,209 @@
+/* Estilos generales para los botones */
+button{
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn_aceptar {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+.btn_aceptar:hover {
+    background-color: #45a049;
+}
+
+.btn_cancelar {
+    background-color: #f44336; 
+    color: white;
+}
+
+.btn_cancelar:hover {
+    background-color: #e53935;
+}
+
+.btn_calcular_edad {
+    background-color: #007BFF; 
+    color: white;
+}
+
+.btn_calcular_edad:hover {
+    background-color: #0056b3;
+}
+
+.agregar_vehiculo {
+    background-color: #007BFF; 
+    color: white;
+}
+
+.agregar_vehiculo:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo general para el textbox */
+input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+/* Cambia el borde y el shadow al hacer foco en el campo de texto */
+input:focus {
+    border-color: #007BFF; /* Azul al hacer foco */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Resplandor azul suave */
+}
+
+/* Estilo para el placeholder */
+input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/*
+Estilo de la tabla
+*/
+
+/* Estilo para las cabeceras */
+.tabla_vehiculos thead tr {
+    background-color: #009879;
+    color: white;
+    font-weight: bold;
+}
+
+/* Bordes para las celdas */
+.tabla_vehiculos th,
+.tabla_vehiculos td {
+    text-align: center;
+    padding: 12px 15px;
+    border: 1px solid black;
+}
+
+.tabla_vehiculos th:hover{
+    transform: translateY(-5px)
+}
+
+/* Efecto hover en las filas */
+.tabla_vehiculos tbody tr:hover {
+    background-color: yellow;
+}
+
+/* Estilo general para h1 */
+h2{
+    font-size: 36px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    letter-spacing: 2px; /* Espaciado entre letras */
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 3px solid #007BFF; /* Línea debajo del h1 */
+    display: inline-block; /* Para ajustar el ancho del h1 al texto */
+}
+
+/* Efecto hover opcional */
+h2:hover {
+    color: #007BFF; /* Cambia el color del texto a azul al hacer hover */
+}
+
+h3 {
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: left;
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    letter-spacing: 2px; /* Espaciado entre letras */
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 3px solid #007BFF; /* Línea debajo del h1 */
+    display: inline-block; /* Para ajustar el ancho del h1 al texto */
+}
+
+/* Efecto hover opcional */
+h3:hover {
+    color: #007BFF; /* Cambia el color del texto a azul al hacer hover */
+}
+
+/* Estilos generales para los labels */
+label {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    color: #333;
+    display: line;
+    margin-bottom: 8px;
+    font-weight: bold;
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+.lbl_grid{
+    font-size: 15px;
+}
+
+/* Estilos generales para el select */
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    appearance: none; /* Elimina el estilo por defecto del navegador */
+    background-position: right 10px center; /* Posiciona la flecha */
+    background-size: 12px;
+    box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
+    transition: border-color 0.3s ease; /* Suaviza el cambio de borde */
+}
+
+/* Efecto foco en el select */
+select:focus {
+    border-color: #007BFF; /* Cambia el borde a azul al enfocar */
+    outline: none; /* Elimina el contorno por defecto */
+}
+
+.contenedor_spinner{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+/* Spinner */
+.spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #3498db; /* Color del spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite; /* Animación de rotación */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.mensaje_error{
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+.form_abm{
+    border: 1px solid #ccc;
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
